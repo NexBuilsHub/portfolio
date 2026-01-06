@@ -10,7 +10,7 @@
             <div class="w-1 h-5 bg-white rounded"></div>
           </div>
         </div>
-        <span class="text-white font-bold text-xl">YB</span>
+        <span class="text-white font-bold text-xl">Youssef Bouayez</span>
       </div>
 
       <!-- Navigation Links -->

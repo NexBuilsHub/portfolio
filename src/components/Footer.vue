@@ -37,7 +37,7 @@
           <h3 class="text-xl font-bold mb-4">Follow Me</h3>
           <div class="flex items-center space-x-4">
             <a 
-              href="https://github.com" 
+              href="https://github.com/youssef218" 
               target="_blank" 
               rel="noopener noreferrer"
               class="w-10 h-10 bg-gray-800 hover:bg-pink-500 rounded-full flex items-center justify-center transition-colors"
@@ -47,7 +47,7 @@
               </svg>
             </a>
             <a 
-              href="https://linkedin.com" 
+              href="https://www.linkedin.com/in/youssef-bouayez-27169224a/" 
               target="_blank" 
               rel="noopener noreferrer"
               class="w-10 h-10 bg-gray-800 hover:bg-pink-500 rounded-full flex items-center justify-center transition-colors"

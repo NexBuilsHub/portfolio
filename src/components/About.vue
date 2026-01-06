@@ -32,10 +32,12 @@
           </div>
           
           <div class="relative" data-aos="fade-left">
-            <div class="aspect-square rounded-lg overflow-hidden shadow-2xl">
-              <div class="w-full h-full bg-gradient-to-br from-pink-500 via-purple-500 to-blue-500 flex items-center justify-center">
-                <span class="text-white text-6xl font-bold">YB</span>
-              </div>
+            <div class="aspect-[4/5] rounded-lg overflow-hidden shadow-2xl">
+              <img 
+                src="/imges/my-photo.jpg" 
+                alt="Youssef Bouayez - Full-Stack Developer"
+                class="w-full h-full object-cover"
+              />
             </div>
             <div class="absolute -bottom-6 -right-6 w-32 h-32 bg-pink-500 rounded-lg opacity-20 -z-10"></div>
           </div>
