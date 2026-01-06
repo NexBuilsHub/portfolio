@@ -7,20 +7,27 @@
         <div class="grid md:grid-cols-2 gap-12 items-center">
           <div data-aos="fade-right">
             <p class="text-lg text-gray-700 mb-6 leading-relaxed">
-              I'm a passionate developer with expertise in modern web technologies. I love creating 
-              beautiful and functional applications that solve real-world problems.
+              Full-Stack Developer with over 2 years of professional experience, including more than 1 year as a freelance developer working on web and mobile applications for international clients.
             </p>
             <p class="text-lg text-gray-700 mb-6 leading-relaxed">
-              With years of experience in software development, I've worked on various projects ranging 
-              from small startups to large enterprise applications.
+              Specialized in React, Next.js, Vue.js, Symfony, and mobile development with React Native and Expo. Experienced in building scalable, production-ready solutions and deploying applications using AWS cloud services.
             </p>
             <div class="flex space-x-4">
-              <button class="px-6 py-3 bg-pink-500 hover:bg-pink-600 text-white rounded-lg transition-colors duration-300">
-                Download CV
-              </button>
-              <button class="px-6 py-3 border-2 border-gray-900 hover:bg-gray-900 hover:text-white rounded-lg transition-colors duration-300">
-                View Portfolio
-              </button>
+              <a 
+                href="/doc/Youssef Bouayez.pdf" 
+                download
+                class="px-6 py-3 bg-pink-500 hover:bg-pink-600 text-white rounded-lg transition-colors duration-300 inline-flex items-center space-x-2"
+              >
+                <ArrowDownTrayIcon class="w-5 h-5" />
+                <span>Download CV</span>
+              </a>
+              <a 
+                href="#portfolio" 
+                class="px-6 py-3 border-2 border-gray-900 hover:bg-gray-900 hover:text-white rounded-lg transition-colors duration-300 inline-flex items-center space-x-2"
+              >
+                <BriefcaseIcon class="w-5 h-5" />
+                <span>View Portfolio</span>
+              </a>
             </div>
           </div>
           
@@ -39,5 +46,5 @@
 </template>
 
 <script setup>
+import { ArrowDownTrayIcon, BriefcaseIcon } from '@heroicons/vue/24/outline'
 </script>
-

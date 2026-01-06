@@ -11,12 +11,17 @@
           data-aos="fade-up"
           :data-aos-delay="index * 100"
         >
-          <div class="h-48 bg-gradient-to-br from-pink-500 to-blue-500"></div>
+          <div class="h-48 bg-gradient-to-br from-pink-500 to-blue-500 flex items-center justify-center">
+            <NewspaperIcon class="w-16 h-16 text-white opacity-50" />
+          </div>
           <div class="p-6">
             <p class="text-gray-400 text-sm mb-2">{{ article.date }}</p>
             <h3 class="text-xl font-bold mb-3">{{ article.title }}</h3>
             <p class="text-gray-400 mb-4">{{ article.excerpt }}</p>
-            <a href="#" class="text-pink-500 hover:text-pink-400 font-semibold">Read More →</a>
+            <a href="#" class="text-pink-500 hover:text-pink-400 font-semibold inline-flex items-center space-x-2">
+              <span>Read More</span>
+              <ArrowRightIcon class="w-4 h-4" />
+            </a>
           </div>
         </article>
       </div>
@@ -25,6 +30,8 @@
 </template>
 
 <script setup>
+import { NewspaperIcon, ArrowRightIcon } from '@heroicons/vue/24/outline'
+
 const news = [
   {
     title: 'The Lorem Ipsum generators',
@@ -43,4 +50,3 @@ const news = [
   }
 ]
 </script>
-

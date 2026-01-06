@@ -14,7 +14,9 @@
           data-aos="zoom-in"
           :data-aos-delay="index * 100"
         >
-          <div class="text-5xl mb-4">{{ skill.icon }}</div>
+          <div class="flex justify-center mb-4">
+            <component :is="skill.icon" class="w-12 h-12 text-pink-500" />
+          </div>
           <h3 class="text-xl font-bold mb-2">{{ skill.name }}</h3>
           <div class="w-full bg-gray-200 rounded-full h-2">
             <div 
@@ -30,15 +32,23 @@
 </template>
 
 <script setup>
+import { 
+  CodeBracketIcon, 
+  ServerIcon, 
+  CloudIcon, 
+  DevicePhoneMobileIcon,
+  PaintBrushIcon,
+  CubeIcon
+} from '@heroicons/vue/24/outline'
+
 const skills = [
-  { name: 'Vue.js', icon: '⚡', level: 90 },
-  { name: 'JavaScript', icon: '📜', level: 95 },
-  { name: 'Node.js', icon: '🟢', level: 85 },
-  { name: 'React', icon: '⚛️', level: 80 },
-  { name: 'TypeScript', icon: '📘', level: 85 },
-  { name: 'Python', icon: '🐍', level: 75 },
-  { name: 'CSS/Tailwind', icon: '🎨', level: 90 },
-  { name: 'Git', icon: '🔀', level: 88 }
+  { name: 'React.js / Next.js', icon: CodeBracketIcon, level: 90 },
+  { name: 'Vue.js', icon: CodeBracketIcon, level: 85 },
+  { name: 'Symfony / PHP', icon: ServerIcon, level: 88 },
+  { name: 'AWS Cloud Services', icon: CloudIcon, level: 85 },
+  { name: 'React Native / Expo', icon: DevicePhoneMobileIcon, level: 80 },
+  { name: 'WordPress', icon: CubeIcon, level: 75 },
+  { name: 'Docker', icon: CubeIcon, level: 82 },
+  { name: 'Web Development', icon: PaintBrushIcon, level: 90 }
 ]
 </script>
-

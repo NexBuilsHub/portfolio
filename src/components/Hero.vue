@@ -12,14 +12,14 @@
     <div class="relative z-20 container mx-auto px-6 py-20">
       <div class="max-w-4xl" data-aos="fade-up">
         <h1 class="text-7xl md:text-9xl font-bold text-white mb-6">
-          <span>Develop</span><span class="text-pink-500">e</span><span>r</span>
+          <span>Full-Stack</span><span class="text-pink-500"> Developer</span>
         </h1>
         <p class="text-xl text-gray-300 mb-8 max-w-2xl">
-          There are many variations of passages of Lorem Ipsum available but the majority have suffered alteration.
+          Full-Stack Developer with over 2 years of professional experience, specialized in React, Next.js, Vue.js, Symfony, and mobile development with React Native and Expo.
         </p>
-        <button class="px-8 py-4 bg-pink-500 hover:bg-pink-600 text-white rounded-lg font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg shadow-pink-500/50">
-          CONTACT US
-        </button>
+        <a href="#portfolio" class="inline-block px-8 py-4 bg-pink-500 hover:bg-pink-600 text-white rounded-lg font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg shadow-pink-500/50">
+          VIEW PORTFOLIO
+        </a>
       </div>
     </div>
 
@@ -28,17 +28,13 @@
       @click="previousSlide"
       class="absolute left-6 top-1/2 -translate-y-1/2 z-30 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-sm flex items-center justify-center text-white transition-all duration-300"
     >
-      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
-      </svg>
+      <ChevronLeftIcon class="w-6 h-6" />
     </button>
     <button 
       @click="nextSlide"
       class="absolute right-6 top-1/2 -translate-y-1/2 z-30 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-sm flex items-center justify-center text-white transition-all duration-300"
     >
-      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-      </svg>
+      <ChevronRightIcon class="w-6 h-6" />
     </button>
 
     <!-- Pagination Dots -->
@@ -56,6 +52,7 @@
 
 <script setup>
 import { ref } from 'vue'
+import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/vue/24/outline'
 
 const currentSlide = ref(0)
 
@@ -67,4 +64,3 @@ const previousSlide = () => {
   currentSlide.value = (currentSlide.value - 1 + 3) % 3
 }
 </script>
-

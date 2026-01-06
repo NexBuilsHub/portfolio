@@ -10,48 +10,48 @@
             
             <div class="relative z-10 text-gray-900">
               <div class="text-center mb-6">
-                <h3 class="text-2xl font-bold text-gray-700 mb-8">CSSWINNER</h3>
+                <h3 class="text-2xl font-bold text-gray-700 mb-8">CISCO</h3>
                 <div class="flex justify-center mb-6">
                   <div class="relative">
                     <div class="w-32 h-32 bg-gradient-to-br from-blue-400 to-pink-400 rounded-full flex items-center justify-center transform rotate-45">
                       <div class="transform -rotate-45 text-center">
-                        <p class="text-xs font-bold">SITE OF THE</p>
-                        <p class="text-2xl font-bold">MONTH</p>
+                        <p class="text-xs font-bold">PCAP</p>
+                        <p class="text-2xl font-bold">CERTIFIED</p>
                       </div>
                     </div>
                     <div class="absolute -left-4 top-8 transform -rotate-45">
-                      <p class="text-xs font-bold">DEC</p>
-                      <p class="text-sm font-bold">2015</p>
+                      <p class="text-xs font-bold">FEB</p>
+                      <p class="text-sm font-bold">2023</p>
                     </div>
                   </div>
                 </div>
                 <p class="text-sm text-gray-600 mb-6">
-                  that the website Molamil.com has been awarded Site of the Month on December 2015, at csswinner.com
+                  Python Certified Associate Programmer from Cisco Networking Academy
                 </p>
                 <div class="flex justify-between items-center text-xs text-gray-500">
-                  <span>2016 Official Certificate</span>
-                  <span class="text-2xl font-bold">W</span>
-                  <span>#CSSW10088</span>
+                  <span>2023 Official Certificate</span>
+                  <span class="text-2xl font-bold">C</span>
+                  <span>PCAP</span>
                 </div>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Awards List -->
+        <!-- Education & Certifications List -->
         <div data-aos="fade-left">
-          <h2 class="text-5xl font-bold mb-8">Awards.</h2>
+          <h2 class="text-5xl font-bold mb-8">Education & Certifications.</h2>
           <div class="space-y-6 max-h-96 overflow-y-auto pr-4">
             <div 
-              v-for="(award, index) in awards" 
+              v-for="(item, index) in education" 
               :key="index"
               class="border-l-4 border-pink-500 pl-6 py-4"
               data-aos="fade-left"
               :data-aos-delay="index * 100"
             >
-              <h3 class="text-xl font-bold mb-2">{{ award.title }}</h3>
-              <p class="text-gray-400">{{ award.status }}</p>
-              <p class="text-pink-400 font-semibold">{{ award.period }}</p>
+              <h3 class="text-xl font-bold mb-2">{{ item.title }}</h3>
+              <p class="text-gray-400">{{ item.institution }}</p>
+              <p class="text-pink-400 font-semibold">{{ item.period }}</p>
             </div>
           </div>
         </div>
@@ -61,31 +61,21 @@
 </template>
 
 <script setup>
-const awards = [
+const education = [
   {
-    title: 'Awwwards.com',
-    status: 'Winner',
-    period: '2010 - 2011'
+    title: 'Web Development Training (Bootcamp Mode)',
+    institution: 'Digital Solidarity Center (Solicode)',
+    period: '2022 - 2023'
   },
   {
-    title: 'CSS winner',
-    status: 'star',
-    period: '2011 - 2012'
+    title: 'PCAP - Python Certified Associate Programmer',
+    institution: 'Cisco Networking Academy',
+    period: 'February 2023'
   },
   {
-    title: 'Design nominees',
-    status: 'site of the day',
-    period: '2013 - 2014'
-  },
-  {
-    title: 'CSS Design Awards',
-    status: 'Winner',
-    period: '2015 - 2016'
-  },
-  {
-    title: 'UI/UX Design Awards',
-    status: 'Winner',
-    period: '2016 - 2017'
+    title: 'Baccalaureate in Physical Sciences',
+    institution: 'High School Mehdi El Manjra',
+    period: '2021 - 2022'
   }
 ]
 </script>
@@ -106,4 +96,3 @@ const awards = [
   border-radius: 3px;
 }
 </style>
-
