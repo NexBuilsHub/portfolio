@@ -34,6 +34,19 @@
       <!-- Projects Grid -->
       <div class="mt-16">
         <h3 class="text-3xl font-bold mb-8 text-center">Projects</h3>
+                
+        <!-- Additional Projects Note -->
+        <div class="my-12 text-center" data-aos="fade-up">
+          <p class="text-gray-400 text-lg">
+            These are some projects I made. I have more than these examples. If you are interested, 
+            <button 
+              @click="scrollToContact"
+              class="text-pink-500 hover:text-pink-400 font-semibold underline transition-colors"
+            >
+              contact me
+            </button>
+          </p>
+        </div>
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           <div 
             v-for="(project, index) in projects" 
@@ -235,15 +248,15 @@ const projects = [
     duration: '3-6 weeks'
   },
   {
-    title: 'Cloud Infrastructure',
+    title: 'AWS Student support',
     description: 'AWS-based cloud solutions and deployment automation',
-    fullDescription: 'Cloud infrastructure setup and deployment automation using AWS services, including EC2, S3, RDS, and CI/CD pipelines for efficient application deployment.',
+    fullDescription: 'I provide comprehensive support for students, assisting with exam preparation and understanding complex concepts. Whether you need help with cloud computing or require assistance with tasks in AWS, I am here to guide you. I can help you complete assignments, prepare reports, and navigate any challenges you face in your studies, ensuring you have the resources and knowledge necessary to succeed.',
     tech: ['AWS', 'Docker', 'CI/CD'],
     icon: CloudIcon,
-    image: null,
-    images: [],
+    image: '/imges/aws.png',
+    images: ['/imges/aws.png', '/imges/aws1.webp'],
     period: '2024',
-    priceRange: '$200-$600',
+    priceRange: 'Contact for pricing',
     duration: '1-3 weeks'
   },
   {
@@ -267,19 +280,19 @@ const projects = [
     image: '/imges/wordPress.webp',
     images: ['/imges/wordPress.webp', '/imges/wordPress1.webp'],
     period: 'May 2024',
-    priceRange: '$50-$100',
+    priceRange: 'Contact for pricing',
     duration: '1-7 days'
   },
   {
-    title: 'E-Commerce Platform',
-    description: 'Full-stack e-commerce solution with payment integration',
-    fullDescription: 'A complete e-commerce platform with shopping cart, payment gateway integration, order management, and admin dashboard for managing products and orders.',
-    tech: ['React', 'Node.js', 'MongoDB'],
+    title: 'Site E-commerce',
+    description: 'Custom e-commerce website for Amazon products with personalized design',
+    fullDescription: 'I fully developed and designed this e-commerce website from scratch, working independently on all aspects of the project. The design was entirely my own creation, based on images provided by the client and incorporating their custom color scheme to match their brand identity. I created a complete e-commerce solution specifically tailored for selling Amazon products, featuring a modern and intuitive user interface. The website includes a comprehensive product catalog, shopping cart functionality, secure checkout process, and seamless integration for Amazon product listings. I implemented custom styling using Tailwind CSS to achieve the exact look and feel the client desired, ensuring the site reflects their brand while providing an excellent user experience. The platform is built with React and Vue.js for the frontend, providing dynamic and responsive interactions, with a Node.js backend handling all server-side operations. The entire development process involved careful attention to design details, user experience optimization, and ensuring the site effectively showcases and sells Amazon products.',
+    tech: ['React', 'Vue.js', 'Node.js', 'Tailwind CSS'],
     icon: CodeBracketIcon,
-    image: null,
-    images: [],
+    image: '/imges/site.png',
+    images: ['/imges/site.png', '/imges/site1.png', '/imges/site2.png', '/imges/site3.png', '/imges/site4.png', '/imges/site5.png', '/imges/site6.png', '/imges/site7.png'],
     period: '2024',
-    priceRange: '$600-$1200',
+    priceRange: 'Contact for pricing',
     duration: '4-8 weeks'
   }
 ]

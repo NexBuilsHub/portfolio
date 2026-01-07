@@ -56,6 +56,15 @@
           </div>
         </div>
       </div>
+
+      <!-- Skills Message -->
+      <div class="mt-16 max-w-3xl mx-auto text-center" data-aos="fade-up">
+        <p class="text-gray-300 text-lg leading-relaxed">
+          My full skills depend on jobs and different experiences to upgrade my skills to a high level. 
+          I can study just a little, but my experience and love for the domain take me far. 
+          Skills integrate into multiple situations, allowing me to adapt and excel in various challenges.
+        </p>
+      </div>
     </div>
   </section>
 </template>
