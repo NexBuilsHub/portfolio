@@ -1,11 +1,23 @@
 <template>
-  <section id="home" class="relative min-h-screen flex items-center justify-center overflow-hidden">
+  <section 
+    id="home" 
+    class="relative min-h-screen flex items-center justify-center overflow-hidden"
+    @mousemove="handleMouseMove"
+  >
     <!-- Background Image with Overlay -->
     <div class="absolute inset-0 z-0">
-      <div class="absolute inset-0 bg-gradient-to-r from-blue-900/50 via-transparent to-pink-900/50 z-10"></div>
+      <div 
+        class="absolute inset-0 bg-gradient-to-r from-blue-900/50 via-transparent to-pink-900/50 z-10 transition-opacity duration-300"
+        :style="{ opacity: gradientOpacity }"
+      ></div>
       <div class="absolute inset-0 bg-black/60 z-10"></div>
-      <!-- Placeholder for background image - you can replace with actual image -->
-      <div class="w-full h-full bg-gradient-to-br from-blue-900 via-purple-900 to-pink-900"></div>
+      <!-- Animated Gradient Background -->
+      <div 
+        class="w-full h-full transition-all duration-500 ease-out"
+        :style="{
+          background: `radial-gradient(circle at ${mouseX}% ${mouseY}%, rgba(59, 130, 246, 0.8) 0%, rgba(147, 51, 234, 0.6) 30%, rgba(236, 72, 153, 0.8) 60%, rgba(17, 24, 39, 0.9) 100%)`
+        }"
+      ></div>
     </div>
 
     <!-- Content Container with Slide Animation -->
@@ -60,6 +72,9 @@ import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/vue/24/outline'
 
 const currentSlide = ref(0)
 const slideDirection = ref('next')
+const mouseX = ref(50)
+const mouseY = ref(50)
+const gradientOpacity = ref(1)
 let autoSlideInterval = null
 
 const slides = [
@@ -79,6 +94,18 @@ const slides = [
     description: 'Freelance Full-Stack Developer working with international clients to transform ideas into scalable, high-performance applications, including multi-tenant platforms.'
   }
 ]
+
+const handleMouseMove = (event) => {
+  const rect = event.currentTarget.getBoundingClientRect()
+  mouseX.value = ((event.clientX - rect.left) / rect.width) * 100
+  mouseY.value = ((event.clientY - rect.top) / rect.height) * 100
+  
+  // Add subtle opacity change based on mouse position
+  const distanceFromCenter = Math.sqrt(
+    Math.pow(mouseX.value - 50, 2) + Math.pow(mouseY.value - 50, 2)
+  )
+  gradientOpacity.value = 0.7 + (distanceFromCenter / 100) * 0.3
+}
 
 const nextSlide = () => {
   slideDirection.value = 'next'
