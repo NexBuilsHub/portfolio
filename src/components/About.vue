@@ -14,8 +14,8 @@
             </p>
             <div class="flex space-x-4">
               <a 
-                href="/doc/Youssef Bouayez.pdf" 
-                download
+                :href="cvUrl" 
+                download="Youssef Bouayez.pdf"
                 class="px-6 py-3 bg-pink-500 hover:bg-pink-600 text-white rounded-lg transition-colors duration-300 inline-flex items-center space-x-2"
               >
                 <ArrowDownTrayIcon class="w-5 h-5" />
@@ -49,4 +49,17 @@
 
 <script setup>
 import { ArrowDownTrayIcon, BriefcaseIcon } from '@heroicons/vue/24/outline'
+
+// Get CV URL with base path for production
+// In Vite, public folder assets are served from root in dev, but need base path in production
+const getCvPath = () => {
+  // For production with base path
+  if (import.meta.env.PROD) {
+    return '/portfolio/doc/Youssef Bouayez.pdf'
+  }
+  // For development
+  return '/doc/Youssef Bouayez.pdf'
+}
+
+const cvUrl = getCvPath()
 </script>
