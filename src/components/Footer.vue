@@ -1,5 +1,5 @@
 <template>
-  <footer class="bg-black text-white py-12">
+  <footer id="contact" class="bg-black text-white py-12">
     <div class="container mx-auto px-6">
       <div class="grid md:grid-cols-3 gap-8 mb-8">
         <!-- Contact Information -->
@@ -28,7 +28,6 @@
             <a href="#home" class="block text-gray-400 hover:text-pink-500 transition-colors">Home</a>
             <a href="#portfolio" class="block text-gray-400 hover:text-pink-500 transition-colors">Portfolio</a>
             <a href="#awards" class="block text-gray-400 hover:text-pink-500 transition-colors">Awards</a>
-            <a href="#news" class="block text-gray-400 hover:text-pink-500 transition-colors">News</a>
           </div>
         </div>
 

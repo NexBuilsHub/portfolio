@@ -6,7 +6,6 @@
     <Experience />
     <Skills />
     <Awards />
-    <News />
     <Footer />
   </div>
 </template>
@@ -19,7 +18,6 @@ import About from './components/About.vue'
 import Experience from './components/Experience.vue'
 import Skills from './components/Skills.vue'
 import Awards from './components/Awards.vue'
-import News from './components/News.vue'
 import Footer from './components/Footer.vue'
 import AOS from 'aos'
 

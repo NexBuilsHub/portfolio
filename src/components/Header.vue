@@ -59,14 +59,14 @@ const navLinks = [
   { name: 'Home', href: '#home' },
   { name: 'Portfolio', href: '#portfolio' },
   { name: 'Awards', href: '#awards' },
-  { name: 'News', href: '#news' },
+  { name: 'contact', href: '#contact' },
 ]
 
 const mobileMenuOpen = ref(false)
 const activeSection = ref('home')
 
 const handleScroll = () => {
-  const sections = ['home', 'portfolio', 'awards', 'news']
+  const sections = ['home', 'portfolio', 'awards', 'contact']
   const scrollPosition = window.scrollY + 100
 
   for (const section of sections) {
