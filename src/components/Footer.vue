@@ -12,7 +12,7 @@
             </a>
             <a href="tel:+212700678895" class="flex items-center space-x-3 text-gray-400 hover:text-pink-500 transition-colors">
               <PhoneIcon class="w-5 h-5" />
-              <span>+212-700678895</span>
+              <span>+212-700-768-895</span>
             </a>
             <div class="flex items-center space-x-3 text-gray-400">
               <MapPinIcon class="w-5 h-5" />
@@ -91,7 +91,7 @@
 <script setup>
 import { EnvelopeIcon, PhoneIcon, MapPinIcon, ArrowUpIcon } from '@heroicons/vue/24/outline'
 
-const phoneNumber = '212700678895' // WhatsApp number without + or spaces
+const phoneNumber = '212700768895' // WhatsApp number without + or spaces
 const message = encodeURIComponent('Hello... I\'m interested in your profile')
 const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`
 
