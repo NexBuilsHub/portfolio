@@ -1,36 +1,29 @@
 <template>
-  <div class="min-h-screen">
+  <div class="min-h-screen bg-obsidian">
+    <CustomCursor />
     <Header />
     <Hero />
     <About />
-    <Experience />
+    <ExperienceTimeline />
+    <ProjectsBento />
+    <FeaturedProduct />
     <Skills />
+    <Interests />
     <Awards />
     <Footer />
   </div>
 </template>
 
 <script setup>
-import { onMounted } from 'vue'
+import CustomCursor from './components/ui/CustomCursor.vue'
 import Header from './components/Header.vue'
 import Hero from './components/Hero.vue'
 import About from './components/About.vue'
-import Experience from './components/Experience.vue'
+import ExperienceTimeline from './components/ExperienceTimeline.vue'
+import ProjectsBento from './components/ProjectsBento.vue'
+import FeaturedProduct from './components/FeaturedProduct.vue'
 import Skills from './components/Skills.vue'
+import Interests from './components/Interests.vue'
 import Awards from './components/Awards.vue'
 import Footer from './components/Footer.vue'
-import AOS from 'aos'
-
-onMounted(() => {
-  AOS.init({
-    duration: 1000,
-    once: true,
-    offset: 100,
-    easing: 'ease-in-out'
-  })
-})
 </script>
-
-<style>
-/* Additional global styles if needed */
-</style>

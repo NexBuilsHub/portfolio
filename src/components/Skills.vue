@@ -1,54 +1,274 @@
 <template>
-  <section id="skills" class="py-20 bg-white text-gray-900">
-    <div class="container mx-auto px-6">
-      <h2 class="text-5xl font-bold mb-4 text-center" data-aos="fade-up">Skills</h2>
-      <p class="text-gray-600 text-center mb-12" data-aos="fade-up" data-aos-delay="100">
-        Technologies and tools I work with
-      </p>
+  <section
+    id="skills"
+    ref="sectionRef"
+    class="relative bg-obsidian"
+    :class="useScrollDrive ? '' : 'py-24'"
+    :style="useScrollDrive ? { height: `${skillCategories.length * 100}vh` } : undefined"
+  >
+    <div
+      class="container mx-auto px-4 md:px-6"
+      :class="useScrollDrive ? 'sticky top-0 h-screen flex flex-col' : ''"
+    >
+      <!-- Header -->
+      <div class="text-center pt-10 pb-0 shrink-0">
+        <h2 class="font-display text-3xl md:text-4xl text-white">Skills</h2>
+        <p class="text-gray-500 text-xs mt-1">
+          Scroll to explore · {{ activeIndex + 1 }} / {{ skillCategories.length }}
+        </p>
+      </div>
 
-      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-        <div 
-          v-for="(skill, index) in skills" 
-          :key="index"
-          class="text-center p-6 bg-gray-50 rounded-lg hover:shadow-lg transition-shadow duration-300"
-          data-aos="zoom-in"
-          :data-aos-delay="index * 100"
+      <!-- Stage: flex-1 gives real height -->
+      <div v-if="useScrollDrive" class="flex-1 relative w-full min-h-0" style="perspective: 1400px;">
+        <!-- 3D ring — visible cards rotating behind & beside main card -->
+        <div
+          class="absolute inset-0 flex items-center justify-center pointer-events-none z-0"
+          style="perspective: 1200px;"
         >
-          <div class="flex justify-center mb-4">
-            <component :is="skill.icon" class="w-12 h-12 text-pink-500" />
+          <div
+            class="ring-3d transition-transform duration-700 ease-out"
+            :style="{
+              transformStyle: 'preserve-3d',
+              transform: `rotateY(${ringRotation}deg)`,
+            }"
+          >
+            <div
+              v-for="(category, index) in skillCategories"
+              :key="`ring-${category.id}`"
+              class="ring-card absolute"
+              :style="getRingCardStyle(index)"
+            >
+              <div
+                class="w-32 h-40 md:w-36 md:h-44 rounded-xl glass-card flex flex-col items-center justify-center gap-2 border transition-all duration-500"
+                :class="index === activeIndex
+                  ? 'border-accent-violet/70 opacity-90 scale-110 shadow-lg shadow-accent-violet/30'
+                  : 'border-white/15 opacity-45 scale-95'"
+              >
+                <component :is="categoryIcons[category.id]" class="w-7 h-7 text-accent-violet" />
+                <span class="text-[11px] md:text-xs text-gray-300 text-center px-2 leading-tight font-medium">
+                  {{ category.title }}
+                </span>
+              </div>
+            </div>
           </div>
-          <h3 class="text-xl font-bold mb-2">{{ skill.name }}</h3>
-          <div class="w-full bg-gray-200 rounded-full h-2">
-            <div 
-              class="bg-gradient-to-r from-pink-500 to-blue-500 h-2 rounded-full transition-all duration-1000"
-              :style="{ width: skill.level + '%' }"
-            ></div>
-          </div>
-          <p class="text-sm text-gray-600 mt-2">{{ skill.level }}%</p>
         </div>
+
+        <!-- Featured card — large display only; ring cards unchanged -->
+        <div class="absolute inset-0 z-10 flex items-center justify-center px-1 md:px-2 py-0">
+          <div class="relative w-full max-w-7xl h-full">
+            <Transition :name="slideDirection" mode="out-in">
+              <div
+                :key="activeIndex"
+                class="featured-card w-full h-full rounded-2xl glass-card border border-white/20 shadow-2xl shadow-accent-violet/15 p-7 sm:p-9 md:p-11 lg:p-12 overflow-y-auto"
+              >
+                <SkillCardContent
+                  :category="skillCategories[activeIndex]"
+                  :icon="categoryIcons[skillCategories[activeIndex].id]"
+                  :index="activeIndex"
+                />
+              </div>
+            </Transition>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile fallback -->
+      <div v-else class="space-y-6 max-w-5xl mx-auto">
+        <div
+          v-for="(category, index) in skillCategories"
+          :key="category.id"
+          class="glass-card p-8 border border-white/10 rounded-2xl"
+        >
+          <SkillCardContent
+            :category="category"
+            :icon="categoryIcons[category.id]"
+            :index="index"
+          />
+        </div>
+      </div>
+
+      <!-- Nav -->
+      <div v-if="useScrollDrive" class="shrink-0 flex justify-center items-center gap-4 py-2">
+        <button
+          type="button"
+          class="interactive w-10 h-10 rounded-full glass-card flex items-center justify-center hover:border-accent-violet/50 transition-colors disabled:opacity-30"
+          :disabled="activeIndex === 0"
+          @click="goTo(activeIndex - 1)"
+        >
+          <ChevronLeftIcon class="w-5 h-5 text-gray-300" />
+        </button>
+        <div class="flex items-center gap-2">
+          <button
+            v-for="(cat, i) in skillCategories"
+            :key="cat.id"
+            type="button"
+            class="interactive rounded-full transition-all duration-300"
+            :class="i === activeIndex ? 'w-8 h-2 bg-accent-violet' : 'w-2 h-2 bg-white/20 hover:bg-white/40'"
+            @click="goTo(i)"
+          />
+        </div>
+        <button
+          type="button"
+          class="interactive w-10 h-10 rounded-full glass-card flex items-center justify-center hover:border-accent-violet/50 transition-colors disabled:opacity-30"
+          :disabled="activeIndex === skillCategories.length - 1"
+          @click="goTo(activeIndex + 1)"
+        >
+          <ChevronRightIcon class="w-5 h-5 text-gray-300" />
+        </button>
       </div>
     </div>
   </section>
 </template>
 
 <script setup>
-import { 
-  CodeBracketIcon, 
-  ServerIcon, 
-  CloudIcon, 
-  DevicePhoneMobileIcon,
-  PaintBrushIcon,
-  CubeIcon
+import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
+import { useMediaQuery } from '@vueuse/core'
+import {
+  CpuChipIcon,
+  CodeBracketIcon,
+  CloudIcon,
+  ChartBarIcon,
+  UserGroupIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon,
 } from '@heroicons/vue/24/outline'
+import { skillCategories } from '../data/skills'
+import { useReducedMotion } from '../composables/useReducedMotion'
+import SkillCardContent from './SkillCardContent.vue'
 
-const skills = [
-  { name: 'React.js / Next.js', icon: CodeBracketIcon, level: 90 },
-  { name: 'Vue.js', icon: CodeBracketIcon, level: 85 },
-  { name: 'Symfony / PHP', icon: ServerIcon, level: 88 },
-  { name: 'AWS Cloud Services', icon: CloudIcon, level: 85 },
-  { name: 'React Native / Expo', icon: DevicePhoneMobileIcon, level: 80 },
-  { name: 'WordPress', icon: CubeIcon, level: 75 },
-  { name: 'Docker', icon: CubeIcon, level: 82 },
-  { name: 'Web Development', icon: PaintBrushIcon, level: 90 }
-]
+const sectionRef = ref(null)
+const activeIndex = ref(0)
+const slideDirection = ref('slide-next')
+const isMobile = useMediaQuery('(max-width: 768px)')
+const { prefersReducedMotion } = useReducedMotion()
+
+const useScrollDrive = computed(() => !isMobile.value && !prefersReducedMotion.value)
+
+const categoryIcons = {
+  ai: CpuChipIcon,
+  dev: CodeBracketIcon,
+  cloud: CloudIcon,
+  seo: ChartBarIcon,
+  leadership: UserGroupIcon,
+}
+
+const count = skillCategories.length
+const angleStep = 360 / count
+
+const ringRotation = computed(() => -activeIndex.value * angleStep)
+
+const getRingCardStyle = (index) => ({
+  left: '50%',
+  top: '50%',
+  marginLeft: '-72px',
+  marginTop: '-88px',
+  transform: `rotateY(${index * angleStep}deg) translateZ(360px)`,
+  transformStyle: 'preserve-3d',
+})
+
+const goTo = (index) => {
+  if (index < 0 || index >= count) return
+  slideDirection.value = index > activeIndex.value ? 'slide-next' : 'slide-prev'
+  activeIndex.value = index
+  scrollToStep(index)
+}
+
+const scrollToStep = (index) => {
+  if (!sectionRef.value || !useScrollDrive.value) return
+  const el = sectionRef.value
+  const scrollable = el.offsetHeight - window.innerHeight
+  const target = (index / (count - 1 || 1)) * scrollable
+  window.scrollTo({ top: el.offsetTop + target, behavior: 'smooth' })
+}
+
+const updateFromScroll = () => {
+  if (!useScrollDrive.value || !sectionRef.value) return
+
+  const el = sectionRef.value
+  const scrollable = el.offsetHeight - window.innerHeight
+  if (scrollable <= 0) return
+
+  const scrolled = -el.getBoundingClientRect().top
+  if (scrolled <= 0) {
+    if (activeIndex.value !== 0) slideDirection.value = 'slide-prev'
+    activeIndex.value = 0
+    return
+  }
+  if (scrolled >= scrollable) {
+    if (activeIndex.value !== count - 1) slideDirection.value = 'slide-next'
+    activeIndex.value = count - 1
+    return
+  }
+
+  const progress = scrolled / scrollable
+  const next = Math.min(Math.floor(progress * count), count - 1)
+  if (next !== activeIndex.value) {
+    slideDirection.value = next > activeIndex.value ? 'slide-next' : 'slide-prev'
+    activeIndex.value = next
+  }
+}
+
+watch(activeIndex, (val, old) => {
+  if (val > old) slideDirection.value = 'slide-next'
+  else if (val < old) slideDirection.value = 'slide-prev'
+})
+
+onMounted(() => {
+  if (useScrollDrive.value) {
+    window.addEventListener('scroll', updateFromScroll, { passive: true })
+    updateFromScroll()
+  }
+})
+
+onUnmounted(() => {
+  window.removeEventListener('scroll', updateFromScroll)
+})
 </script>
+
+<style scoped>
+.ring-3d {
+  position: relative;
+  width: 1px;
+  height: 1px;
+  transform-style: preserve-3d;
+}
+
+.ring-card {
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+}
+
+/* Transition must fill parent */
+.slide-next-enter-active,
+.slide-next-leave-active,
+.slide-prev-enter-active,
+.slide-prev-leave-active {
+  transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.slide-next-enter-from {
+  opacity: 0;
+  transform: translateX(120px) rotateY(-10deg);
+}
+.slide-next-leave-to {
+  opacity: 0;
+  transform: translateX(-120px) rotateY(10deg);
+}
+
+.slide-prev-enter-from {
+  opacity: 0;
+  transform: translateX(-120px) rotateY(10deg);
+}
+.slide-prev-leave-to {
+  opacity: 0;
+  transform: translateX(120px) rotateY(-10deg);
+}
+
+.slide-next-enter-to,
+.slide-next-leave-from,
+.slide-prev-enter-to,
+.slide-prev-leave-from {
+  opacity: 1;
+  transform: translateX(0) rotateY(0deg);
+}
+</style>

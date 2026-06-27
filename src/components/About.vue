@@ -1,47 +1,55 @@
 <template>
-  <section id="about" class="py-20 bg-white text-gray-900">
+  <section id="about" class="py-24 bg-obsidian bg-mesh-gradient">
     <div class="container mx-auto px-6">
-      <div class="max-w-4xl mx-auto">
-        <h2 class="text-5xl font-bold mb-12 text-center" data-aos="fade-up">About Me</h2>
-        
-        <div class="grid md:grid-cols-2 gap-12 items-center">
-          <div data-aos="fade-right">
-            <p class="text-lg text-gray-700 mb-6 leading-relaxed">
-              Full-Stack Developer with over 2 years of professional experience, including more than 1 year as a freelance developer working on web and mobile applications for international clients.
+      <SectionReveal>
+        <h2 class="section-heading text-center">Profile</h2>
+      </SectionReveal>
+
+      <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-12 items-center mt-12">
+        <SectionReveal :delay="100">
+          <GlassCard padding="p-8">
+            <p class="text-lg text-gray-300 mb-6 leading-relaxed">
+              {{ profile.bio }}
             </p>
-            <p class="text-lg text-gray-700 mb-6 leading-relaxed">
-              Specialized in React, Next.js, Vue.js, Symfony, and mobile development with React Native and Expo. Experienced in building scalable, production-ready solutions and deploying applications using AWS cloud services.
+            <p class="text-gray-400 mb-8 leading-relaxed">
+              Experienced in building multi-tenant SaaS systems, AI reception solutions, and Shopify automation tools — from architecture design to cloud deployment and monitoring.
             </p>
-            <div class="flex space-x-4">
-              <a 
-                :href="cvUrl" 
-                download="Youssef Bouayez.pdf"
-                class="px-6 py-3 bg-pink-500 hover:bg-pink-600 text-white rounded-lg transition-colors duration-300 inline-flex items-center space-x-2"
-              >
-                <ArrowDownTrayIcon class="w-5 h-5" />
-                <span>Download CV</span>
-              </a>
-              <a 
-                href="#portfolio" 
-                class="px-6 py-3 border-2 border-gray-900 hover:bg-gray-900 hover:text-white rounded-lg transition-colors duration-300 inline-flex items-center space-x-2"
-              >
-                <BriefcaseIcon class="w-5 h-5" />
-                <span>View Portfolio</span>
-              </a>
+            <div class="flex flex-wrap gap-4">
+              <MagneticButton>
+                <a
+                  :href="cvUrl"
+                  download="Youssef Bouayez.pdf"
+                  class="interactive inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-accent-violet to-accent-cyan text-white rounded-xl font-semibold text-sm"
+                >
+                  <ArrowDownTrayIcon class="w-5 h-5" />
+                  Download CV
+                </a>
+              </MagneticButton>
+              <MagneticButton>
+                <a
+                  href="#projects"
+                  class="interactive inline-flex items-center gap-2 px-6 py-3 glass-card text-white rounded-xl font-semibold text-sm hover:border-accent-violet/40"
+                >
+                  <BriefcaseIcon class="w-5 h-5" />
+                  View Portfolio
+                </a>
+              </MagneticButton>
             </div>
-          </div>
-          
-          <div class="relative" data-aos="fade-left">
-            <div class="aspect-[4/5] rounded-lg overflow-hidden shadow-2xl">
-              <img 
-                src="/imges/my-photo.jpg" 
-                alt="Youssef Bouayez - Full-Stack Developer"
-                class="w-full h-full object-cover"
+          </GlassCard>
+        </SectionReveal>
+
+        <SectionReveal :delay="200">
+          <div class="relative">
+            <div class="aspect-[4/5] rounded-2xl overflow-hidden glass-card p-1">
+              <img
+                :src="photoUrl"
+                :alt="`${profile.name} - ${profile.title}`"
+                class="w-full h-full object-cover rounded-xl"
               />
             </div>
-            <div class="absolute -bottom-6 -right-6 w-32 h-32 bg-pink-500 rounded-lg opacity-20 -z-10"></div>
+            <div class="absolute -bottom-4 -right-4 w-32 h-32 bg-accent-violet/20 rounded-2xl blur-2xl -z-10" />
           </div>
-        </div>
+        </SectionReveal>
       </div>
     </div>
   </section>
@@ -49,17 +57,13 @@
 
 <script setup>
 import { ArrowDownTrayIcon, BriefcaseIcon } from '@heroicons/vue/24/outline'
-
-// Get CV URL with base path for production
-// In Vite, public folder assets are served from root in dev, but need base path in production
-const getCvPath = () => {
-  // For production with base path
-  if (import.meta.env.PROD) {
-    return '/portfolio/doc/Youssef Bouayez.pdf'
-  }
-  // For development
-  return '/doc/Youssef Bouayez.pdf'
-}
+import { profile, getCvPath } from '../data/profile'
+import { useAssetPath } from '../composables/useAssetPath'
+import SectionReveal from './ui/SectionReveal.vue'
+import GlassCard from './ui/GlassCard.vue'
+import MagneticButton from './ui/MagneticButton.vue'
 
 const cvUrl = getCvPath()
+const { getAssetPath } = useAssetPath()
+const photoUrl = getAssetPath('/imges/my-photo.jpg')
 </script>
