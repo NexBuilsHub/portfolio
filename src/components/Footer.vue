@@ -1,26 +1,26 @@
 <template>
   <footer id="contact" class="bg-obsidian border-t border-white/10 py-16">
     <div class="container mx-auto px-6">
-      <div class="grid md:grid-cols-3 gap-8 mb-12">
+      <div class="grid md:grid-cols-3 gap-8 mb-12 text-center md:text-left">
         <div>
           <h3 class="text-xl font-bold text-white mb-4">Contact</h3>
           <div class="space-y-3">
             <a
               :href="`mailto:${profile.contact.email}`"
-              class="interactive flex items-center space-x-3 text-gray-400 hover:text-accent-cyan transition-colors"
+              class="interactive flex items-center justify-center md:justify-start space-x-3 text-gray-400 hover:text-accent-cyan transition-colors"
             >
-              <EnvelopeIcon class="w-5 h-5" />
+              <EnvelopeIcon class="w-5 h-5 shrink-0" />
               <span>{{ profile.contact.email }}</span>
             </a>
             <a
               :href="`tel:${profile.contact.phone.replace(/\s/g, '')}`"
-              class="interactive flex items-center space-x-3 text-gray-400 hover:text-accent-cyan transition-colors"
+              class="interactive flex items-center justify-center md:justify-start space-x-3 text-gray-400 hover:text-accent-cyan transition-colors"
             >
-              <PhoneIcon class="w-5 h-5" />
+              <PhoneIcon class="w-5 h-5 shrink-0" />
               <span>{{ profile.contact.phone }}</span>
             </a>
-            <div class="flex items-center space-x-3 text-gray-400">
-              <MapPinIcon class="w-5 h-5" />
+            <div class="flex items-center justify-center md:justify-start space-x-3 text-gray-400">
+              <MapPinIcon class="w-5 h-5 shrink-0" />
               <span>{{ profile.contact.location }}</span>
             </div>
           </div>
@@ -39,7 +39,7 @@
 
         <div>
           <h3 class="text-xl font-bold text-white mb-4">Follow Me</h3>
-          <div class="flex items-center space-x-4">
+          <div class="flex items-center justify-center md:justify-start space-x-4">
             <a
               :href="profile.social.github"
               target="_blank"
@@ -77,7 +77,7 @@
         </div>
       </div>
 
-      <div class="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-white/10">
+      <div class="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-white/10 text-center">
         <p class="text-gray-500 mb-4 md:mb-0">©2026 Youssef Bouayez. All Rights Reserved.</p>
         <MagneticButton>
           <button

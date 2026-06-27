@@ -7,14 +7,14 @@
 
       <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-12 items-center mt-12">
         <SectionReveal :delay="100">
-          <GlassCard padding="p-8">
+          <GlassCard padding="p-8 text-center md:text-left">
             <p class="text-lg text-gray-300 mb-6 leading-relaxed">
               {{ profile.bio }}
             </p>
             <p class="text-gray-400 mb-8 leading-relaxed">
               Experienced in building multi-tenant SaaS systems, AI reception solutions, and Shopify automation tools — from architecture design to cloud deployment and monitoring.
             </p>
-            <div class="flex flex-wrap gap-4">
+            <div class="flex flex-wrap gap-4 justify-center md:justify-start">
               <MagneticButton>
                 <a
                   :href="cvUrl"

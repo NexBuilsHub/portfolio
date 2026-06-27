@@ -14,7 +14,8 @@
       <div class="text-center pt-10 pb-0 shrink-0">
         <h2 class="font-display text-3xl md:text-4xl text-white">Skills</h2>
         <p class="text-gray-500 text-xs mt-1">
-          Scroll to explore · {{ activeIndex + 1 }} / {{ skillCategories.length }}
+          <span v-if="useScrollDrive">Scroll to explore · {{ activeIndex + 1 }} / {{ skillCategories.length }}</span>
+          <span v-else>Tap a category to expand</span>
         </p>
       </div>
 
@@ -72,18 +73,46 @@
         </div>
       </div>
 
-      <!-- Mobile fallback -->
-      <div v-else class="space-y-6 max-w-5xl mx-auto">
+      <!-- Mobile: collapsed accordion, one open at a time -->
+      <div v-else class="py-8 space-y-3 max-w-lg mx-auto w-full">
         <div
           v-for="(category, index) in skillCategories"
           :key="category.id"
-          class="glass-card p-8 border border-white/10 rounded-2xl"
+          class="glass-card rounded-2xl border overflow-hidden transition-all duration-300"
+          :class="mobileOpenIndex === index ? 'border-accent-violet/40' : 'border-white/10'"
         >
-          <SkillCardContent
-            :category="category"
-            :icon="categoryIcons[category.id]"
-            :index="index"
-          />
+          <button
+            type="button"
+            class="interactive w-full p-5 text-center"
+            @click="toggleMobileSkill(index)"
+          >
+            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-accent-violet to-accent-cyan flex items-center justify-center mx-auto mb-3">
+              <component :is="categoryIcons[category.id]" class="w-6 h-6 text-white" />
+            </div>
+            <span class="text-xs font-mono text-accent-cyan">0{{ index + 1 }}</span>
+            <h3 class="text-lg font-bold text-white font-display mt-1">{{ category.title }}</h3>
+            <ChevronDownIcon
+              class="w-5 h-5 text-gray-500 mx-auto mt-2 transition-transform duration-300"
+              :class="mobileOpenIndex === index ? 'rotate-180 text-accent-violet' : ''"
+            />
+          </button>
+
+          <div
+            class="grid transition-all duration-300 ease-out"
+            :class="mobileOpenIndex === index ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'"
+          >
+            <div class="overflow-hidden">
+              <div class="px-5 pb-5 pt-0 border-t border-white/5">
+                <SkillCardContent
+                  :category="category"
+                  :icon="categoryIcons[category.id]"
+                  :index="index"
+                  centered
+                  hide-header
+                />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -131,6 +160,7 @@ import {
   UserGroupIcon,
   ChevronLeftIcon,
   ChevronRightIcon,
+  ChevronDownIcon,
 } from '@heroicons/vue/24/outline'
 import { skillCategories } from '../data/skills'
 import { useReducedMotion } from '../composables/useReducedMotion'
@@ -138,6 +168,7 @@ import SkillCardContent from './SkillCardContent.vue'
 
 const sectionRef = ref(null)
 const activeIndex = ref(0)
+const mobileOpenIndex = ref(null)
 const slideDirection = ref('slide-next')
 const isMobile = useMediaQuery('(max-width: 768px)')
 const { prefersReducedMotion } = useReducedMotion()
@@ -171,6 +202,10 @@ const goTo = (index) => {
   slideDirection.value = index > activeIndex.value ? 'slide-next' : 'slide-prev'
   activeIndex.value = index
   scrollToStep(index)
+}
+
+const toggleMobileSkill = (index) => {
+  mobileOpenIndex.value = mobileOpenIndex.value === index ? null : index
 }
 
 const scrollToStep = (index) => {
